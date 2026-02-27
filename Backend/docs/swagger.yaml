@@ -1,0 +1,49 @@
+definitions:
+  models.VM:
+    properties:
+      cores:
+        example: 2
+        type: integer
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Ubuntu VM/LXC
+        type: string
+      pcie:
+        example:
+        - ""
+        items:
+          type: string
+        type: array
+      ram:
+        example: 4096
+        type: integer
+      status:
+        example: running
+        type: string
+      usbs:
+        example:
+        - ""
+        items:
+          type: string
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /vms:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of Virtual Machines
+          schema:
+            items:
+              $ref: '#/definitions/models.VM'
+            type: array
+      summary: Simple Get List of VMs
+      tags:
+      - VMs
+swagger: "2.0"

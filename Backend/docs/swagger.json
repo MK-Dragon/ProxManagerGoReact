@@ -1,0 +1,75 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/vms": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "VMs"
+                ],
+                "summary": "Simple Get List of VMs",
+                "responses": {
+                    "200": {
+                        "description": "List of Virtual Machines",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.VM"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.VM": {
+            "type": "object",
+            "properties": {
+                "cores": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Ubuntu VM/LXC"
+                },
+                "pcie": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        ""
+                    ]
+                },
+                "ram": {
+                    "type": "integer",
+                    "example": 4096
+                },
+                "status": {
+                    "type": "string",
+                    "example": "running"
+                },
+                "usbs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        ""
+                    ]
+                }
+            }
+        }
+    }
+}
