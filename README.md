@@ -16,6 +16,11 @@ go get github.com/gin-gonic/gin
 go get github.com/swaggo/swag@latest
 go get github.com/swaggo/gin-swagger
 go get github.com/swaggo/files
+
+# Changing to Fiber:
+go get github.com/gofiber/fiber/v2
+go get github.com/gofiber/swagger
+
 ```
 
 # Run as Dev

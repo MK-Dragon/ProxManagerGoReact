@@ -7,26 +7,30 @@ import (
 	"fmt"
 	//"strings"
 
-	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	//"github.com/gin-gonic/gin"
+	//swaggerFiles "github.com/swaggo/files"
+	//ginSwagger "github.com/swaggo/gin-swagger"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/swagger" // Fiber-specific swagger
 	_ "proxmanager/backend/docs" // for Swagger
 )
 
 func main() {
-	fmt.Println("Proxmox Manager - GO Backend")
+	fmt.Println("Proxmox Manager - GO Backend (Fiber)")
 
-	r := gin.Default()
+	app := fiber.New()
 
-	r.GET("/vms", GetVMs)
+	// Routes
+	app.Get("/vms", GetVMs)
 	//r.GET("/lxcs", GetLXCs)
 	//r.POST("/turn-off", TurnOff)
 	//r.POST("/turn-on", TurnOn)
 
-	// Swagger Route
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// Swagger Route - Access at /swagger/index.html
+	app.Get("/swagger/*", swagger.HandlerDefault)
 
-	r.Run(":8080")
+	app.Listen(":8080")
 }
 
 // GetVMs godoc
@@ -35,7 +39,7 @@ func main() {
 // @Produce json
 // @Success 200 {array} models.VM "List of Virtual Machines"
 // @Router /vms [get]
-func GetVMs(c *gin.Context) {
+func GetVMs(c *fiber.Ctx) error {
 	// test data
 	data := []models.VM{
 		{
@@ -62,6 +66,6 @@ func GetVMs(c *gin.Context) {
 		},
 	}
 
-	// Return the data
-	c.JSON(200, data)
+	// In Fiber, we return the result of c.JSON
+	return c.Status(fiber.StatusOK).JSON(data)
 }
